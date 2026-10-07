@@ -4,9 +4,9 @@
 Реализован механизм импорта Python-модулей по HTTP URL через `sys.path_hooks`.
 
 Компоненты:
-- `urlhook.py` — проверяет URL и получает HTML-каталог;
-- `url_finder.py` — сообщает импорт-системе, существует ли модуль/пакет;
-- `urlloader.py` — скачивает исходный код и выполняет его;
+- `remote_import/urlhook.py` — проверяет URL и получает HTML-каталог;
+- `remote_import/url_finder.py` — сообщает импорт-системе, существует ли модуль/пакет;
+- `remote_import/urlloader.py` — скачивает исходный код и выполняет его;
 - `activation_script.py` — активирует hook.
 
 ## Запуск
@@ -16,6 +16,7 @@
 cd rootserver
 python3 -m http.server 8000
 ```
+![http.server](screenshots/http_server.png)
 
 Терминал 2:
 ```bash
@@ -33,6 +34,8 @@ myremotemodule.myfoo()
 ```text
 gr34a module is imported
 ```
+
+![myremotemodule](screenshots/myremotemodule.png)
 
 ## Проверка пакета (***)
 
@@ -65,7 +68,9 @@ import myremotemodule
 myremotemodule.myfoo()
 ```
 
-В `urlhook_requests.py` и `urlloader_requests.py` вместо `urllib.request.urlopen` используется `requests.get`.
+![activation_requests](screenshots/activation_requests.png)
+
+В `remote_import/urlhook_requests.py` и `remote_import/urlloader_requests.py` вместо `urllib.request.urlopen` используется `requests.get`.
 
 ## Задание со звездочкой (*)
 
@@ -81,6 +86,7 @@ python3 demo_unavailable.py
 Handled remote import error:
 Remote host is unavailable: http://localhost:65500
 ```
+![demo_unav](screenshots/demo_unav.png)
 
 ## Дополнительное задание с другими хостингами
 

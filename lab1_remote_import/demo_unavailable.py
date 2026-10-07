@@ -1,5 +1,5 @@
 import sys
-import urlhook
+from remote_import import urlhook
 
 sys.path.append("http://localhost:65500")
 

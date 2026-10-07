@@ -3,7 +3,7 @@ import sys
 from urllib.request import urlopen
 from urllib.error import URLError, HTTPError
 
-from url_finder import URLFinder
+from .url_finder import URLFinder
 
 
 def _get_listing(url):

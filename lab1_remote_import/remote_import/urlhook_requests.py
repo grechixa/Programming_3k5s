@@ -2,7 +2,7 @@ import re
 import sys
 import requests
 
-from url_finder_requests import URLFinder
+from .url_finder_requests import URLFinder
 
 
 def _get_listing(url):

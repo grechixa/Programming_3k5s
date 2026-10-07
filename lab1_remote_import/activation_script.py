@@ -1,5 +1,5 @@
 import sys
-import urlhook
+from remote_import import urlhook
 
 print("URL import hook activated.")
 print("Add a remote repository with:")

@@ -1,6 +1,6 @@
 from importlib.abc import PathEntryFinder
 from importlib.util import spec_from_loader
-from urlloader_requests import URLLoader
+from .urlloader_requests import URLLoader
 
 
 class URLFinder(PathEntryFinder):
@@ -10,19 +10,23 @@ class URLFinder(PathEntryFinder):
         self.available_packages = available_packages
 
     def find_spec(self, name, target=None):
-        if name in self.available_packages:
-            return spec_from_loader(
+        module_name = name.rpartition(".")[2]
+
+        if module_name in self.available_packages:
+            spec = spec_from_loader(
                 name,
                 URLLoader(),
-                origin=f"{self.url}/{name}/__init__.py",
+                origin=f"{self.url}/{module_name}/__init__.py",
                 is_package=True,
             )
+            spec.submodule_search_locations = [f"{self.url}/{module_name}"]
+            return spec
 
-        if name in self.available_modules:
+        if module_name in self.available_modules:
             return spec_from_loader(
                 name,
                 URLLoader(),
-                origin=f"{self.url}/{name}.py",
+                origin=f"{self.url}/{module_name}.py",
                 is_package=False,
             )
 
